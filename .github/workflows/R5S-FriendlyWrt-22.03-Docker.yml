@@ -1,0 +1,116 @@
+name: R5S-FriendlyWrt-22.03-Docker
+on:
+  push:
+    branches: [ master ]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@main
+
+    - name: Initialization Environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        sudo rm -rf /etc/apt/sources.list.d
+        wget https://raw.githubusercontent.com/friendlyarm/build-env-on-ubuntu-bionic/master/install.sh
+        sed -i -e 's/^apt-get -y install openjdk-8-jdk/# apt-get -y install openjdk-8-jdk/g' install.sh
+        sed -i -e 's/^\[ -d fa-toolchain \]/# [ -d fa-toolchain ]/g' install.sh
+        sed -i -e 's/^cat fa-toolchain/# cat fa-toolchain/g' install.sh
+        sudo -E bash ./install.sh
+        sudo -E update-alternatives --install $(which python) python /usr/bin/python2.7 20
+        sudo -E git config --global user.name 'GitHub Actions'
+        sudo -E git config --global user.email 'noreply@github.com'
+        git clone https://github.com/friendlyarm/repo
+        sudo -E cp repo/repo /usr/bin/
+        mkdir -p ./artifact
+        sudo swapoff -a
+        sudo rm -rf /usr/share/dotnet /usr/local/lib/android/sdk /usr/local/share/boost /opt/ghc
+
+    - name: Download Source
+      run: |
+        mkdir project
+        cd project
+        repo init --depth=1 -u https://github.com/friendlyarm/friendlywrt_manifests -b master-v22.03 \
+                -m rk3568.xml --repo-url=https://github.com/friendlyarm/repo  --no-clone-bundle
+        repo sync -c  --no-clone-bundle
+
+    - name: Apply Customizations
+      run: |
+        cd project
+        source ../scripts/add_packages.sh
+        source ../scripts/custome_config.sh
+
+    - name: Prepare Config and Feeds
+      run: |
+        cd project
+        cat > .current_config.mk <<EOL
+        . device/friendlyelec/rk3568/base.mk
+        TARGET_IMAGE_DIRNAME=friendlywrt22-docker
+        TARGET_FRIENDLYWRT_CONFIG=rockchip-docker
+        TARGET_SD_RAW_FILENAME=R5S-FriendlyWrt-22.03-Docker.img
+        TARGET_EFLASHER_RAW_FILENAME=R5S-FriendlyWrt-22.03-Docker_eflasher.img
+        EOL
+        DEBUG_DOT_CONFIG=1 ./build.sh friendlywrt
+
+    - name: Download Package
+      run: |
+        cd project/friendlywrt
+        make download -j8
+        find dl -size -1024c -exec ls -l {} \;
+        find dl -size -1024c -exec rm -f {} \;
+
+    - name: Compile FriendlyWrt
+      id: compile
+      continue-on-error: true
+      run: |
+        cd project/friendlywrt
+        make -j$(nproc) || make -j1 || make -j1 V=s
+        echo $?
+
+    - name: Check The Result And Try Again
+      if: steps.compile.outcome == 'failure'
+      run: |
+        cd project/friendlywrt
+        make -j1 V=s
+
+    - name: Compile Uboot and Kernel
+      run: |
+        cd project
+        ./build.sh kernel
+        ./build.sh uboot
+
+    - name: Build SD Image
+      id: build_sd_image
+      run: |
+        cd project
+        ./build.sh sd-img
+        mv out/R5S-FriendlyWrt-22.03-Docker.img ../artifact/
+        cd ../artifact/
+        gzip *.img
+        release_tag="FriendlyWrt-$(date +%Y-%m-%d)"
+        echo "##[set-output name=release_tag;]$release_tag"
+
+    - name: Create Release
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.build_sd_image.outputs.release_tag }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./artifact/R5S-FriendlyWrt-22.03-Docker.img.gz
+        asset_name: R5S-FriendlyWrt-22.03-Docker.img.gz
+        asset_content_type: application/gzip
+
+
