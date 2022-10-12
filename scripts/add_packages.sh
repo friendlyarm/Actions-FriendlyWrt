@@ -13,7 +13,6 @@ CONFIG_PACKAGE_luci-app-diskman_INCLUDE_btrfs_progs=y
 CONFIG_PACKAGE_luci-app-diskman_INCLUDE_lsblk=y
 CONFIG_PACKAGE_smartmontools=y
 EOL
-sed -i -e '/function custom_menu/a\ \ \ \ nas+=("/usr/lib/lua/luci/controller/diskman.lua")' friendlywrt/target/linux/rockchip/armv8/base-files/root/setup.sh
 # }}
 
 # {{ Add luci-theme-argon
