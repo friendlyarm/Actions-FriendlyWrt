@@ -141,7 +141,7 @@ jobs:
     strategy:
       matrix:
         VERSION: [21.02, 22.03]
-        CPU: [rk3328, rk3399, rk3568]
+        CPU: [rk3328, rk3399, rk3568, rk3588]
         SET: [docker, non-docker]
     steps:
     - name: Checkout
@@ -217,6 +217,9 @@ jobs:
           ;;
         rk3568)
           MODEL=R5S
+          ;;
+        rk3588)
+          MODEL=R6S
           ;;
         *)
           echo "unknow cpu"
