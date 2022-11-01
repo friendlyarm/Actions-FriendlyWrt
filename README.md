@@ -11,8 +11,8 @@
 ### 如何将固件写入eMMC  
 - 先将固件写入一张SD卡，然后从SD启动系统，访问FriendyWrt后台页面，进入菜单“系统”->“eMMC刷机助手”，上传固件文件直接刷入即可，文件无需解压，写入完成后，将SD卡弹出, 设备会自动重启并从eMMC引导系统。
 ### 更新说明
-2022/10/09
- - 首次发布
+- 2022/11/01 增加R6S支持
+- 2022/10/09 首次发布
 ### Thanks / 致谢
 - [luci-app-diskman](https://github.com/lisaac/luci-app-diskman)
 - [luci-theme-argon](https://github.com/jerrykuku/luci-theme-argon)
