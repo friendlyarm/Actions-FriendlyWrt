@@ -3,7 +3,7 @@ on:
     types: started
 jobs:
   prepare_release:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-20.04, self-hosted
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
     - name: Get release tag
@@ -27,7 +27,7 @@ jobs:
 
   build_friendlywrt:
     needs: prepare_release
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-20.04, self-hosted
     if: github.event.repository.owner.id == github.event.sender.id
     strategy:
       matrix:
@@ -135,7 +135,7 @@ jobs:
 
   build_img:
     needs: [prepare_release,build_friendlywrt]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-20.04, self-hosted
     if: github.event.repository.owner.id == github.event.sender.id
 
     strategy:
