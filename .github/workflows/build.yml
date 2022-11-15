@@ -186,7 +186,7 @@ jobs:
 
     - name: Download friendlywrt rootfs (non-docker)
       if: matrix.SET == 'non-docker'
-      uses: robinraju/release-downloader@v1.5
+      uses: robinraju/release-downloader@v1.6
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -196,7 +196,7 @@ jobs:
 
     - name: Download friendlywrt rootfs (docker)
       if: matrix.SET == 'docker'
-      uses: robinraju/release-downloader@v1.5
+      uses: robinraju/release-downloader@v1.6
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
