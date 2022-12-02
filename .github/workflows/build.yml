@@ -216,7 +216,7 @@ jobs:
           MODEL=R4S-Series
           ;;
         rk3568)
-          MODEL=R5S
+          MODEL=R5S-R5C-Series
           ;;
         rk3588)
           MODEL=R6S
