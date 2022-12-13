@@ -11,9 +11,15 @@
 ### How to write image to eMMC  
 - First write the image to an SD card, then boot the system from the SD card, visit the FriendyWrt admin page, go to the menu "System" -> "eMMC Tools", upload the image file and flash it in directly, no need to decompress the file, after the flashing is completed, eject the SD card, the device will automatically reboot and boot from the eMMC.
 ### Changelog
-- 2022/11/24 Fix R6S 1G LAN port issue, eMMC-Tools can be run on eMMC
-- 2022/11/01 Add support for NanoPi-R6S
-- 2022/10/09 Initial commit
+* 2022/12/04
+    *  Add support for NanoPi-R5C
+    *  Fix the issue that the storage space cannot be expanded
+    *  Improve stability of the eMMC Tools
+* 2022/11/24
+    *  Fix R6S 1G LAN port issue
+    *  eMMC-Tools can be run on eMMC
+* 2022/11/01 Add support for NanoPi-R6S
+* 2022/10/09 Initial commit
 ### For more information
 Please first take a look at [our Wiki](https://wiki.friendlyelec.com) which covers the most basics.  
 Should you have any additional question, please send a mail to techsupport@friendlyarm.com, and we are willing to help.  
