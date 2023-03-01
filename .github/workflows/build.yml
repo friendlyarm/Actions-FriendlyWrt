@@ -47,6 +47,7 @@ jobs:
         sed -i -e 's/^apt-get -y install openjdk-8-jdk/# apt-get -y install openjdk-8-jdk/g' install.sh
         sed -i -e 's/^\[ -d fa-toolchain \]/# [ -d fa-toolchain ]/g' install.sh
         sed -i -e 's/^cat fa-toolchain/# cat fa-toolchain/g' install.sh
+        sed -i -e 's/^tar xf fa-toolchain/# tar xf fa-toolchain/g' install.sh
         sudo -E bash ./install.sh
         sudo -E update-alternatives --install $(which python) python /usr/bin/python2.7 20
         sudo -E git config --global user.name 'GitHub Actions'
@@ -156,6 +157,7 @@ jobs:
         sed -i -e 's/^apt-get -y install openjdk-8-jdk/# apt-get -y install openjdk-8-jdk/g' install.sh
         sed -i -e 's/^\[ -d fa-toolchain \]/# [ -d fa-toolchain ]/g' install.sh
         sed -i -e 's/^cat fa-toolchain/# cat fa-toolchain/g' install.sh
+        sed -i -e 's/^tar xf fa-toolchain/# tar xf fa-toolchain/g' install.sh
         sudo -E bash ./install.sh
         sudo -E update-alternatives --install $(which python) python /usr/bin/python2.7 20
         sudo -E git config --global user.name 'GitHub Actions'
