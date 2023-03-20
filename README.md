@@ -13,7 +13,7 @@
 ### 更新说明
 * 2023/03/15
     *  增加R6C支持
-    *  更新initramfs,可配置OverlayFS
+    *  更新initramfs,[可禁用OverlayFS或者创建额外的分区](https://wiki.friendlyelec.com/wiki/index.php/How_to_use_overlayfs_on_Linux/zh)
 * 2023/03/01
     *  更新到新版本 openwrt-22.03.3
     *  为rk3568/rk3588的5.10内核增加ntfs3驱动

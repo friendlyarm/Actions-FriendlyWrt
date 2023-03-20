@@ -13,7 +13,7 @@
 ### Changelog
 * 2023/03/15
     *  Add support for NanoPi-R6C
-    *  Update initramfs
+    *  Update initramfs,[you can disable or resize OverlayFS](https://wiki.friendlyelec.com/wiki/index.php/How_to_use_overlayfs_on_Linux)
 * 2023/03/01
     *  Upgrade to openwrt-22.03.3
     *  Add ntfs3 driver for 5.10 kernel (for R6S/R5S/R5C)
