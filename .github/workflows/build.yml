@@ -249,8 +249,9 @@ jobs:
     - name: Compile uboot and kernel
       run: |
         cd project
-        ./build.sh kernel
         ./build.sh uboot
+        ./build.sh kernel
+        source ../scripts/wifi/add_rtl8852be.sh
 
     - name: Build sd image
       id: build_sd_image
