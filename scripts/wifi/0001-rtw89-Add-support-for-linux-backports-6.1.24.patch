@@ -1,0 +1,63 @@
+From 3725851fc168414bb72b16335d75d9099e25206d Mon Sep 17 00:00:00 2001
+From: Jensen Huang <jensenhuang@friendlyarm.com>
+Date: Fri, 9 Jun 2023 16:36:57 +0800
+Subject: [PATCH] rtw89: Add support for linux backports-6.1.24
+
+Signed-off-by: Jensen Huang <jensenhuang@friendlyarm.com>
+---
+ Makefile | 22 ++++++++++++++++++++++
+ core.h   |  5 +++++
+ 2 files changed, 27 insertions(+)
+
+diff --git a/Makefile b/Makefile
+index f1f40f0..c5b2d69 100644
+--- a/Makefile
++++ b/Makefile
+@@ -12,6 +12,28 @@ else
+ MODDESTDIR := /lib/modules/$(KVER)/kernel/drivers/net/wireless/rtw89
+ endif
+ 
++ifneq ($(BACKPORT_DIR),)
++include $(BACKPORT_DIR)/versions
++
++ifeq ($(BACKPORTED_LINUX_VERSION_CODE),)
++$(error "BACKPORTED_LINUX_VERSION_CODE is undefined")
++endif
++
++NOSTDINC_FLAGS += \
++	-I$(BACKPORT_DIR)/backport-include/ \
++	-I$(BACKPORT_DIR)/backport-include/uapi \
++	-I$(BACKPORT_DIR)/include/ \
++	-I$(BACKPORT_DIR)/include/uapi \
++	-include backport/backport.h \
++	$(call backport-cc-disable-warning, unused-but-set-variable) \
++	-DCPTCFG_VERSION=\"$(BACKPORTS_VERSION)\" \
++	-DCPTCFG_KERNEL_VERSION=\"$(BACKPORTED_KERNEL_VERSION)\" \
++	-DCPTCFG_KERNEL_NAME=\"$(BACKPORTED_KERNEL_NAME)\" \
++	-DCPTCFG_KERNEL_CODE=$(BACKPORTED_LINUX_VERSION_CODE)
++
++KBUILD_EXTRA_SYMBOLS += $(BACKPORT_DIR)/Module.symvers
++endif
++
+ #Handle the compression option for modules in 3.18+
+ ifneq ("","$(wildcard $(MODDESTDIR)/*.ko.gz)")
+ COMPRESS_GZIP := y
+diff --git a/core.h b/core.h
+index f932243..b433fe3 100644
+--- a/core.h
++++ b/core.h
+@@ -13,6 +13,11 @@
+ #include <net/mac80211.h>
+ #include <linux/version.h>
+ 
++#if defined(CPTCFG_KERNEL_CODE)
++#undef LINUX_VERSION_CODE
++#define LINUX_VERSION_CODE CPTCFG_KERNEL_CODE
++#endif
++
+ struct rtw89_dev;
+ struct rtw89_pci_info;
+ 
+-- 
+2.39.2
+

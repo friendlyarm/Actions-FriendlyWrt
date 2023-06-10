@@ -1,6 +1,6 @@
 #!/bin/bash
 set -eu
-
+top_path=$(pwd)
 pushd kernel
 kernel_ver=`make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm64 kernelrelease`
 popd
@@ -9,8 +9,8 @@ modules_dir=$(readlink -f ./out/output_*_kmodules/lib/modules/${kernel_ver})
 	echo "please build kernel first."
 	exit 1
 }
-firmware_dir="$(pwd)/rtl8852be/lib/firmware/rtw89"
-config_dir="$(pwd)/rtl8852be/etc/modules.d/"
+firmware_dir="${top_path}/rtl8852be/lib/firmware/rtw89"
+config_dir="${top_path}/rtl8852be/etc/modules.d/"
 mkdir ${firmware_dir} ${config_dir} -p
 
 # download firmware
@@ -26,7 +26,15 @@ git clone https://github.com/lwfinger/rtw89.git -b main
 (cd rtw89 && {
 	git reset 38b8a48d04b8440266db6ea730e9b9cf84463981 --hard
 	export PATH=/opt/FriendlyARM/toolchain/11.3-aarch64:$PATH
-	make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm64 -C ../kernel M=$(pwd)
+
+	if grep 'symbol:backport' ${modules_dir}/modules.symbols >/dev/null; then
+		# kernel with backports
+		git am ${top_path}/../scripts/wifi/0001-rtw89-Add-support-for-linux-backports-6.1.24.patch
+		make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm64 BACKPORT_DIR=${top_path}/out/backports -C ${top_path}/kernel M=$(pwd)
+	else
+		make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm64 -C ${top_path}/kernel M=$(pwd)
+	fi
+
 	cp *.ko ${modules_dir}/ -afv
 })
 
