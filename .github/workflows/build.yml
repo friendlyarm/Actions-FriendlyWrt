@@ -270,4 +270,3 @@ jobs:
         asset_name: ${{ steps.config.outputs.img_filename }}.gz
         tag: ${{ needs.prepare_release.outputs.release_tag }}
         overwrite: true
-
