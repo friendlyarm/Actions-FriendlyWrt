@@ -251,7 +251,6 @@ jobs:
         cd project
         ./build.sh uboot
         ./build.sh kernel
-        source ../scripts/wifi/add_rtl8852be.sh
 
     - name: Build sd image
       id: build_sd_image
