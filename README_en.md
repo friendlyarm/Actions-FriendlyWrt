@@ -11,6 +11,9 @@
 ### How to write image to eMMC  
 - First write the image to an SD card, then boot the system from the SD card, visit the FriendyWrt admin page, go to the menu "System" -> "eMMC Tools", upload the image file and flash it in directly, no need to decompress the file, after the flashing is completed, eject the SD card, the device will automatically reboot and boot from the eMMC.
 ### Changelog
+* 2023/10/31
+    *  Upgrade to openwrt-23.05.0
+    *  Bump kernel version to 6.1
 * 2023/07/04
     *  Bump kernel version to 5.10.160 (rk3568/rk3588)
 * 2023/06/10
