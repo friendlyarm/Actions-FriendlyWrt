@@ -11,6 +11,8 @@
 ### 如何将固件写入eMMC  
 - 先将固件写入一张SD卡，然后从SD启动系统，访问FriendyWrt后台页面，进入菜单“系统”->“eMMC刷机助手”，上传固件文件直接刷入即可，文件无需解压，写入完成后，将SD卡弹出, 设备会自动重启并从eMMC引导系统。
 ### 更新说明
+* 2024/02/02
+    *  为模块rtl8822ce增加无线中继模式的支持,[设置方法](https://wiki.friendlyelec.com/wiki/index.php/NanoPi_R5C/zh#.E6.97.A0.E7.BA.BF.E4.B8.AD.E7.BB.A7.E6.A8.A1.E5.BC.8F)
 * 2023/12/22
     *  更新到新版本 openwrt-23.05.2
     *  修正eMMC刷机工具对大容量eMMC的兼容性问题
