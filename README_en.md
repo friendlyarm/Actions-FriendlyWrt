@@ -11,6 +11,8 @@
 ### How to write image to eMMC  
 - First write the image to an SD card, then boot the system from the SD card, visit the FriendyWrt admin page, go to the menu "System" -> "eMMC Tools", upload the image file and flash it in directly, no need to decompress the file, after the flashing is completed, eject the SD card, the device will automatically reboot and boot from the eMMC.
 ### Changelog
+* 2024/03/29
+    *  Upgrade to openwrt-23.05.3
 * 2024/02/02
     *  Add wireless repeater mode support for rtl8822ce,[How-to-use](https://wiki.friendlyelec.com/wiki/index.php/NanoPi_R5C#Wireless_Repeater_Mode)
 * 2023/12/22
