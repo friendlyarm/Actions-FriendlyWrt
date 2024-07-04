@@ -11,6 +11,8 @@
 ### How to write image to eMMC  
 - First write the image to an SD card, then boot the system from the SD card, visit the FriendyWrt admin page, go to the menu "System" -> "eMMC Tools", upload the image file and flash it in directly, no need to decompress the file, after the flashing is completed, eject the SD card, the device will automatically reboot and boot from the eMMC.
 ### Changelog
+* 2024/07/03
+    *  Fix the wifi issue due to missing firmware
 * 2024/06/06
     *  RK35xx kernel version updated to 6.1.57
 * 2024/03/29
