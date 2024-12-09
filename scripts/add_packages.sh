@@ -2,8 +2,10 @@
 
 # {{ Add luci-app-diskman
 (cd friendlywrt && {
+    COMMIT_ID=975859fb7030ded885287c312a8127333f656930
     mkdir -p package/luci-app-diskman
-    wget https://raw.githubusercontent.com/lisaac/luci-app-diskman/master/applications/luci-app-diskman/Makefile -O package/luci-app-diskman/Makefile
+    wget https://raw.githubusercontent.com/lisaac/luci-app-diskman/${COMMIT_ID}/applications/luci-app-diskman/Makefile \
+        -O package/luci-app-diskman/Makefile
     mkdir -p package/parted
     wget https://raw.githubusercontent.com/lisaac/luci-app-diskman/master/Parted.Makefile -O package/parted/Makefile
 })
