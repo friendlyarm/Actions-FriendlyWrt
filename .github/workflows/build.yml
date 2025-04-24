@@ -3,7 +3,7 @@ on:
     types: started
 jobs:
   prepare_release:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
     - name: Get release tag
@@ -27,7 +27,7 @@ jobs:
 
   build_friendlywrt:
     needs: prepare_release
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     if: github.event.repository.owner.id == github.event.sender.id
     strategy:
       matrix:
@@ -49,7 +49,6 @@ jobs:
         sed -i -e 's/^(cat fa-toolchain/# (cat fa-toolchain/g' install.sh
         sed -i -e 's/^(tar xf fa-toolchain/# (tar xf fa-toolchain/g' install.sh
         sudo -E bash ./install.sh
-        sudo -E update-alternatives --install $(which python) python /usr/bin/python2.7 20
         sudo -E git config --global user.name 'GitHub Actions'
         sudo -E git config --global user.email 'noreply@github.com'
         git clone https://github.com/friendlyarm/repo
@@ -136,7 +135,7 @@ jobs:
 
   build_img:
     needs: [prepare_release,build_friendlywrt]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     if: github.event.repository.owner.id == github.event.sender.id
 
     strategy:
@@ -159,7 +158,6 @@ jobs:
         sed -i -e 's/^(cat fa-toolchain/# (cat fa-toolchain/g' install.sh
         sed -i -e 's/^(tar xf fa-toolchain/# (tar xf fa-toolchain/g' install.sh
         sudo -E bash ./install.sh
-        sudo -E update-alternatives --install $(which python) python /usr/bin/python2.7 20
         sudo -E git config --global user.name 'GitHub Actions'
         sudo -E git config --global user.email 'noreply@github.com'
         git clone https://github.com/friendlyarm/repo
