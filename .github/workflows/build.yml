@@ -141,7 +141,7 @@ jobs:
     strategy:
       matrix:
         VERSION: ['23.05', '24.10']
-        CPU: [rk3328, rk3528, rk3399, rk3566, rk3568, rk3588]
+        CPU: [rk3328, rk3528, rk3399, rk3566, rk3568, rk3576, rk3588]
         SET: [docker, non-docker]
     steps:
     - name: Checkout
@@ -223,6 +223,9 @@ jobs:
           ;;
         rk3566)
           MODEL=R3S-Series
+          ;;
+        rk3576)
+          MODEL=NanoPi-M5
           ;;
         rk3588)
           MODEL=T6-R6S-R6C-M6-Series
