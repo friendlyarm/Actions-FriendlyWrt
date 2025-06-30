@@ -256,6 +256,9 @@ jobs:
     - name: Compile uboot and kernel
       run: |
         cd project
+        ## If you need to modify the kernel configuration, please edit the script below
+        # source ../scripts/custome_kernel_config.sh
+
         ./build.sh uboot
         ./build.sh kernel
 
