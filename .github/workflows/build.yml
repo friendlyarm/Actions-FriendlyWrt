@@ -225,7 +225,7 @@ jobs:
           MODEL=R3S-Series
           ;;
         rk3576)
-          MODEL=NanoPi-M5
+          MODEL=M5-R76S-Series
           ;;
         rk3588)
           MODEL=T6-R6S-R6C-M6-Series
