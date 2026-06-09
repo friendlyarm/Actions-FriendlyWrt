@@ -14,6 +14,9 @@
 - 小版本升级（如 25.12.2 → 25.12.3）：在 "eMMC 刷机助手" 中刷入 images-XXYYZZ.tgz，可选择保留数据，但兼容性需自行评估。
 - 大版本升级（如 24.10 → 25.12）：建议先[备份配置](https://openwrt.org/docs/guide-user/troubleshooting/backup_restore)，然后使用 XYZ.img.gz 全量安装，以避免兼容性问题。
 ### 更新说明
+* 2026/06/09
+    *  RK33xx内核更新至6.6.134, 优化内核配置，修复重启后 USB 设备偶发无法工作的问题
+    *  增加 NanoPi-M6V2 支持
 * 2026/06/05
     *  更新到新版本 openwrt-25.12.4
 * 2026/04/29
