@@ -14,6 +14,8 @@
 - 小版本升级（如 25.12.2 → 25.12.3）：在 "eMMC 刷机助手" 中刷入 images-XXYYZZ.tgz，可选择保留数据，但兼容性需自行评估。
 - 大版本升级（如 24.10 → 25.12）：建议先[备份配置](https://openwrt.org/docs/guide-user/troubleshooting/backup_restore)，然后使用 XYZ.img.gz 全量安装，以避免兼容性问题。
 ### 更新说明
+* 2026/06/25
+    *  新增对 NanoPC-T4 和 NanoPi-M4v2 板载 WiFi 的支持
 * 2026/06/09
     *  RK33xx内核更新至6.6.134, 优化内核配置，修复重启后 USB 设备偶发无法工作的问题
     *  增加 NanoPi-M6V2 支持
@@ -24,7 +26,7 @@
     *  更新了"eMMC 刷机助手"，加强稳定性，支持更多格式
     *  内核启用内置fq_codel队列调度以改善网络延迟
 * 2026/03/06
-    * 增加 NanoPi-NEO3-Plus 支持
+    *  增加 NanoPi-NEO3-Plus 支持
 * 2025/12/31
     *  更新到新版本 openwrt-24.10.4
     *  RK35xx内核更新至6.1.141
