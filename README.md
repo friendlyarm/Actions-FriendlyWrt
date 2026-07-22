@@ -14,6 +14,8 @@
 - 小版本升级（如 25.12.2 → 25.12.3）：在 "eMMC 刷机助手" 中刷入 images-XXYYZZ.tgz，可选择保留数据，但兼容性需自行评估。
 - 大版本升级（如 24.10 → 25.12）：建议先[备份配置](https://openwrt.org/docs/guide-user/troubleshooting/backup_restore)，然后使用 XYZ.img.gz 全量安装，以避免兼容性问题。
 ### 更新说明
+* 2026/07/22
+    *  更新RTL8125驱动, 提升2.5G网卡性能，降低待机功耗
 * 2026/07/08
     *  更新到新版本 openwrt-25.12.5
 * 2026/06/25
