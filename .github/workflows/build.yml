@@ -270,7 +270,7 @@ jobs:
           MODEL=R2S-R2C-Series
           ;;
         rk3528)
-          MODEL=Zero2-NEO3Plus-Series
+          MODEL=R28S-Zero2-NEO3Plus-Series
           ;;
         rk3399)
           MODEL=R4S-Series
