@@ -14,7 +14,7 @@
 - Minor version upgrade (e.g., 25.12.2 → 25.12.3): Flash images-XXYYZZ.tgz via the "eMMC Tools". You may choose to keep existing data, but compatibility should be evaluated on your own.
 - Major version upgrade (e.g., 24.10 → 25.12): It is recommended to [back up your configuration](https://openwrt.org/docs/guide-user/troubleshooting/backup_restore) first, then perform a full installation using XYZ.img.gz to avoid compatibility issues.
 ### Changelog
-* 2026/08/06
+* 2026/08/07
     *  Added support for NanoPi-R28S
     *  Fixed RTL8125-related issue [#130](https://github.com/friendlyarm/Actions-FriendlyWrt/issues/130)
 * 2026/07/22
